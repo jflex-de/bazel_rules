@@ -26,7 +26,9 @@ package jflex.examples.helloworld;
 
 // A name is a non-empty sequence of letters. :letter: is a predefined macro that corresponds to any
 // Unicode letter.
-NAME=[:letter:]+
+NAME=[:letter:]([:letter:]|[ ])*
+
+NL = \r | \n | \r\n
 
 %{
   private String name = "World";
@@ -36,6 +38,15 @@ NAME=[:letter:]+
 %%
 
 // Save the name in the private `name` field.
-"name " {NAME}    { name = yytext().substring("name ".length()); }
+"name " {NAME} {NL} {
+    // Remove the "name " prefix
+    name = yytext().substring("name ".length());
+    // Also remove the leading {NL} that was matched.
+    // A more advanced technique to do this would be to start a lexer state.
+    name= name.trim();
+}
+
 // Output the last name.
-[Hh] "ello"       { System.out.print(String.format("Hello %s", name)); }
+[Hh] "ello" {
+    System.out.print(String.format("Hello %s!", name));
+}

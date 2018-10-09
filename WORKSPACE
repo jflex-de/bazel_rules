@@ -12,3 +12,10 @@ maven_jar(
     repository = "https://jcenter.bintray.com/",
     sha1 = "eb4d51e1a8ea7ee96068905ddeceb9b28737c7eb",
 )
+
+# Deps used by examples.
+maven_jar(
+  name = "com_google_guava_guava_26_0_jre",
+  artifact = "com.google.guava:guava:26.0-jre",
+  repository = "http://jcenter.bintray.com/",
+)
