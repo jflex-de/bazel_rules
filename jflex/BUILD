@@ -11,27 +11,12 @@ java_binary(
     ],
 )
 
-# Alias to latest version
-alias(
-    name = "jflex",
-    actual = ":jflex_1_7_0",
-)
-
-alias(
-    name = "cup_runtime",
-    actual = "cup_runtime_11b",
-)
-
 java_library(
-    name = "jflex_1_7_0",
-    # Only the latest version should be used
-    visibility = ["//visibility:private"],
-    # @de_jflex_jflex_1_6_1 points to the reference in the WORKSPACE
+    name = "jflex",
     exports = ["@de_jflex_jflex_1_7_0//jar"],
 )
 
 java_library(
-    name = "cup_runtime_11b",
+    name = "cup_runtime",
     exports = ["@de_jflex_cup_runtime_11b//jar"],
-    visibility = ["//visibility:private"],
 )
