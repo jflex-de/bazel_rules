@@ -1,3 +1,5 @@
+package(default_visibility=["//visibility:public"])
+
 load("//jflex:jflex.bzl","jflex")
 
 # The target that generates the java code from the flex specification.
@@ -6,6 +8,7 @@ jflex(
     name = "gen_hello_lexer",
     srcs = ["helloworld.flex"],
     outputs = ["HelloWorld.java"],
+    visibility = ["//visibility:private"],
 )
 
 
@@ -22,5 +25,5 @@ java_library(
 java_binary(
     name = "helloworld_bin",
     main_class = "jflex.examples.helloworld.HelloWorld",
-    runtime_deps = [":helloworld"]
+    runtime_deps = [":helloworld"],
 )
