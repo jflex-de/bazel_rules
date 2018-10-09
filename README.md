@@ -50,6 +50,7 @@ See `java/jflex/examples/helloworld`.
 ## Directory layout
 
 ```
+├── assets                 → assets for the web site
 ├── java                   → main Java source code
 │   └── jflex
 │       └── examples       → examples
