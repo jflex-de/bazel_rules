@@ -3,6 +3,8 @@
 Rules to generate java source files from a lexer specification, by [JFlex][gh-jflex],
 for projects using the [Bazel build system][bazel].
 
+This is not an officially supported Google product.
+
 ## Preparation
 ### Update your workspace
 
