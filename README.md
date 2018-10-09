@@ -13,7 +13,7 @@ Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
     git_repository(
             name = "jflex_rules",
             remote = "https://github.com/jflex-de/bazel_rules.git",
-            tag = "stable",
+            branch = "stable",
     )
 
     load("@jflex_rules//jflex:deps.bzl", "jflex_deps")
