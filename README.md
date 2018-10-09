@@ -33,7 +33,7 @@ Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
 
 Then, this rule can be used as one of the `srcs` of another rules, such as a `java_library`.
 
-### Example
+## Example
 
 The example "jflex.examples.helloworld" generates a lexer from `helloworld.flex` with:
 
@@ -45,9 +45,22 @@ The example "jflex.examples.helloworld" generates a lexer from `helloworld.flex`
 
 See `java/jflex/examples/helloworld`.
 
+## Directory layout
+
+```
+├── java                   → main Java source code
+│   └── jflex
+│       └── examples       → examples
+├── javatests              → tests
+├── jflex                  → contains the `jflex.bzl`
+└── third_party            → Aliases for third-party libraries
+    └── com
+        └── google
+            └── guava
+```
+
 
 [bazel]: http://bazel.build/
 [gh-jflex]: https://github.com/jflex-de/jflex
 [be_maven_jar]: https://docs.bazel.build/versions/master/be/workspace.html#maven_jar
 [be_workspace]: https://docs.bazel.build/versions/master/tutorial/java.html#set-up-the-workspace 
-[be_3p]: https://docs.bazel.build/versions/master/best-practices.html#third-party-dependencies
