@@ -1,0 +1,12 @@
+# Copyright 2018 Google LLC.
+# SPDX-License-Identifier: Apache-2.0
+
+# https://docs.bazel.build/versions/master/remote-caching.html
+# Valid values are: <arch>-sandbox, local, processwrapper-sandbox, sandboxed, standalone, worker
+build --spawn_strategy=sandboxed
+build --genrule_strategy=sandboxed
+build --strategy=Javac=sandboxed
+
+# Shows errors clearly
+test --test_output=errors
+
