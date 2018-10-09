@@ -11,19 +11,19 @@ Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
     load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
     git_repository(
-            name = "jflex_bazel_rules",
+            name = "jflex_rules",
             remote = "https://github.com/jflex-de/bazel_rules.git",
             tag = "stable",
     )
 
-    load("@jflex_bazel_rules//jflex:jflex.bzl", "jflex_deps")
+    load("@jflex_rules//jflex:deps.bzl", "jflex_deps")
 
     jflex_deps()
 
 
 ## Usage
 
-    load("@jflex_bazel_rules//jflex:jflex.bzl", "jflex")
+    load("@jflex_rules//jflex:jflex.bzl", "jflex")
 
     jflex(
         name = "",           # Choose a rule name
