@@ -35,6 +35,27 @@ Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
 
 Then, this rule can be used as one of the `srcs` of another rules, such as a `java_library`.
 
+## Example
+ The example "jflex.examples.helloworld" generates a lexer from `helloworld.flex` with:
+     jflex(
+        name = "gen_hello_lexer",
+        srcs = ["helloworld.flex"],
+        outputs = ["HelloWorld.java"],
+    )
+ See `java/jflex/examples/helloworld`.
+ ## Directory layout
+ ```
+├── assets                 → assets for the web site
+├── java                   → main Java source code
+│   └── jflex
+│       └── examples       → examples
+├── javatests              → tests
+├── jflex                  → contains the `jflex.bzl`
+└── third_party            → Aliases for third-party libraries
+    └── com
+        └── google
+            └── guava
+```
 
 
 [bazel]: http://bazel.build/
