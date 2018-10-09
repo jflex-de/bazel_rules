@@ -13,10 +13,9 @@ def jflex_deps():
         repository = "https://jcenter.bintray.com/",
     )
 
-
     # Deps used by examples.
     native.maven_jar(
-      name = "com_google_guava_guava_26_0_jre",
-      artifact = "com.google.guava:guava:26.0-jre",
-      repository = "http://jcenter.bintray.com/",
+        name = "com_google_guava_guava_26_0_jre",
+        artifact = "com.google.guava:guava:26.0-jre",
+        repository = "http://jcenter.bintray.com/",
     )

@@ -6,8 +6,8 @@ java_binary(
     name = "jflex_bin",
     main_class = "jflex.Main",
     runtime_deps = [
-        ":jflex",
         ":cup_runtime",
+        ":jflex",
     ],
 )
 

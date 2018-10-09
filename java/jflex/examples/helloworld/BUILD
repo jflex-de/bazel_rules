@@ -1,6 +1,6 @@
-package(default_visibility=["//visibility:public"])
+package(default_visibility = ["//visibility:public"])
 
-load("//jflex:jflex.bzl","jflex")
+load("//jflex:jflex.bzl", "jflex")
 
 # The target that generates the java code from the flex specification.
 # This is what the //jflex:jflex.bzl rule provides :-)
@@ -11,7 +11,6 @@ jflex(
     visibility = ["//visibility:private"],
 )
 
-
 # A Java library that other programs can depend on.
 # Not very useful because it's only public method is main.
 # Well, it can be used in a hava_binary. See below.
@@ -19,7 +18,6 @@ java_library(
     name = "helloworld",
     srcs = [":gen_hello_lexer"],
 )
-
 
 # Executable version of the lexer
 java_binary(
