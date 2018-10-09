@@ -1,7 +1,5 @@
-# Workspace file for the Bazel build system
-# https://bazel.build/
-
-# This WORKSPACE file defines the Bazel workspace.
+# This WORKSPACE file defines the workspace for the Bazel build system.
+# See https://bazel.build/
 # https://docs.bazel.build/versions/master/build-ref.html#workspace
 
 # TODO(regisd) Add maven 1.7.0 when cup_runtime is published
