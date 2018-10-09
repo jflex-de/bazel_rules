@@ -43,7 +43,7 @@ def _jflex_impl(ctx):
     ctx.action(
         inputs = ctx.files.srcs + maybe_skel,
         outputs = ctx.outputs.outputs,
-        executable = ctx.executable._jflex,
+        executable = ctx.executable.jflex_bin,
         arguments =
             arguments,
     )
@@ -64,10 +64,11 @@ jflex = rule(
             doc = "an optional skeleton",
         ),
         "outputs": attr.output_list(allow_empty = False),
-        "_jflex": attr.label(
+        "jflex_bin": attr.label(
             default = Label("//jflex:jflex_bin"),
             executable = True,
             cfg = "host",
+            doc = "the java_binary of JFlex",
         ),
     },
     output_to_genfiles = True,  # JFlex generates java files, not bin files
