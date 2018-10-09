@@ -3,6 +3,10 @@
 Rules to generate java source files from a lexer specification, by [JFlex][gh-jflex],
 for projects using the [Bazel build system][bazel].
 
+Master: [![Build Status](https://api.cirrus-ci.com/github/jflex-de/bazel_rules.svg)](https://cirrus-ci.com/github/jflex-de/bazel_rules)
+
+## Disclaimer
+
 This is not an officially supported Google product.
 
 ## Preparation
