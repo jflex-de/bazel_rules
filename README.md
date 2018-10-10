@@ -12,7 +12,7 @@ This is not an officially supported Google product.
 ## Preparation
 ### Update your workspace
 
-Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
+Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]:
 
     load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
@@ -39,17 +39,29 @@ Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
 
 Then, this rule can be used as one of the `srcs` of another rules, such as a `java_library`.
 
+### Attributes
+
+* **name** (Name; required)
+  Unique name for this target.
+* **srcs** (List of labels; required)
+  List of flex specifications.
+* **outputs** (list of labels; required)
+  List of the generated java files.
+* **skeleton** (Label; optional)
+  Skeleton use by the JFlex Emitter. **Only use this option if you know what you are doing.**
+  
+
 ### Example
 
-The example "jflex.examples.helloworld" generates a lexer from `helloworld.flex` with:
+The example **//java/jflex/examples/helloworld** generates a lexer from `helloworld.flex` with:
  
      jflex(
         name = "gen_hello_lexer",
         srcs = ["helloworld.flex"],
         outputs = ["HelloWorld.java"],
     )
- 
-See `java/jflex/examples/helloworld`.
+
+See [//java/jflex/examples/helloworld](/java/jflex/examples/helloworld) for more information.
  
 ## Directory layout
  ```
@@ -64,46 +76,6 @@ See `java/jflex/examples/helloworld`.
         └── google
             └── guava
 ```
-
-## Simple example
-
-#### Generate the lexer
-
-    blaze build //java/jflex/examples/simple:gen_lexer
-
-Expected output:
-
-* (`examples/`)`bazel-genfiles/java/jflex/examples/simple/Yylex.java` Java code generated from the flex file.
-
-### Build
-
-Generate the Java library
-
-    blaze build //simple:simple
-
-Expected output:
-
-* (`examples/`)`bazel-genfiles/simple/Yylex.java` Java code generated from the flex file.
-
-
-#### Test 
-
-To execute the tests
-
-    blaze test //simple/...
-
-To run the lexer on any file
-
-    bazel run //simple:simple_bin -- /full/path/to/src/test/data/test.txt
-    
-**N.B.** Relative path doesn't work in `bazel run`.
-
-**Rem:** The Bazel commands work from any directory in the workspace.
-
-Alternatively, use the generated artifact. From the `examples` directory:
-
-    bazel-bin/simple/simple_bin simple/src/test/data/test.txt
-    
 
 
 [bazel]: http://bazel.build/
