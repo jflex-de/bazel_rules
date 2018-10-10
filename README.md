@@ -39,8 +39,9 @@ Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
 
 Then, this rule can be used as one of the `srcs` of another rules, such as a `java_library`.
 
-## Example
- The example "jflex.examples.helloworld" generates a lexer from `helloworld.flex` with:
+### Example
+
+The example "jflex.examples.helloworld" generates a lexer from `helloworld.flex` with:
  
      jflex(
         name = "gen_hello_lexer",
@@ -48,9 +49,9 @@ Then, this rule can be used as one of the `srcs` of another rules, such as a `ja
         outputs = ["HelloWorld.java"],
     )
  
- See `java/jflex/examples/helloworld`.
+See `java/jflex/examples/helloworld`.
  
- ## Directory layout
+## Directory layout
  ```
 ├── assets                 → assets for the web site
 ├── java                   → main Java source code
@@ -63,6 +64,46 @@ Then, this rule can be used as one of the `srcs` of another rules, such as a `ja
         └── google
             └── guava
 ```
+
+## Simple example
+
+#### Generate the lexer
+
+    blaze build //java/jflex/examples/simple:gen_lexer
+
+Expected output:
+
+* (`examples/`)`bazel-genfiles/java/jflex/examples/simple/Yylex.java` Java code generated from the flex file.
+
+### Build
+
+Generate the Java library
+
+    blaze build //simple:simple
+
+Expected output:
+
+* (`examples/`)`bazel-genfiles/simple/Yylex.java` Java code generated from the flex file.
+
+
+#### Test 
+
+To execute the tests
+
+    blaze test //simple/...
+
+To run the lexer on any file
+
+    bazel run //simple:simple_bin -- /full/path/to/src/test/data/test.txt
+    
+**N.B.** Relative path doesn't work in `bazel run`.
+
+**Rem:** The Bazel commands work from any directory in the workspace.
+
+Alternatively, use the generated artifact. From the `examples` directory:
+
+    bazel-bin/simple/simple_bin simple/src/test/data/test.txt
+    
 
 
 [bazel]: http://bazel.build/
