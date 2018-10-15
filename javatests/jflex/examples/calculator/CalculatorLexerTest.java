@@ -1,10 +1,8 @@
 package jflex.examples.calculator;
 
-import  com.google.common.truth.ThrowableSubject;
 ;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -14,9 +12,7 @@ import java_cup.runtime.Symbol;
 import org.junit.After;
 import org.junit.Test;
 
-/**
- * Test for the generated {@link CalculatorLexer}.
- */
+/** Test for the generated {@link CalculatorLexer}. */
 public class CalculatorLexerTest {
 
   private CalculatorLexer lexer;
@@ -45,9 +41,7 @@ public class CalculatorLexerTest {
     assertThatNextTokenIsEqualTo(Calc.EOF);
   }
 
-  /**
-   * Tests that the action {@code [^]} from the grammar handles unknown tokens.
-   */
+  /** Tests that the action {@code [^]} from the grammar handles unknown tokens. */
   @Test
   public void test_illegalInput() throws IOException {
     lexer = createLexer("aze");
@@ -56,12 +50,14 @@ public class CalculatorLexerTest {
       fail("The lexer should throw a " + CalculatorParserException.class);
     } catch (CalculatorParserException e) {
       assertThat(e).hasMessageThat().isEqualTo("Illegal character <a>");
-    }}
+    }
+  }
 
   private void assertThatNextTokenIsEqualTo(int symbol, Object value) throws IOException {
     Symbol token = lexer.next_token();
     assertWithMessage("The symbol should be of type " + symbol).that(token.sym).isEqualTo(symbol);
-    assertWithMessage(String.format("The symbol should have value %s",value)).that(token.value)
+    assertWithMessage(String.format("The symbol should have value %s", value))
+        .that(token.value)
         .isEqualTo(value);
   }
 

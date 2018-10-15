@@ -1,6 +1,5 @@
 package jflex.examples.calculator;
 
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 
@@ -16,9 +15,7 @@ public class CalculatorParserTest {
     assertThat(symbol.value).isEqualTo(1 + 2 + (3 + 4) * 5 + 6);
   }
 
-  /**
-   * The lexer is happy producing tokens for this input, but this is invalid for the grammar.
-   */
+  /** The lexer is happy producing tokens for this input, but this is invalid for the grammar. */
   @Test
   public void test_invalidSyntax() throws Exception {
     final String input = "1 + (3";
