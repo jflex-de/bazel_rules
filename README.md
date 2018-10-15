@@ -12,7 +12,7 @@ This is not an officially supported Google product.
 ## Preparation
 ### Update your workspace
 
-Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
+Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]:
 
     load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
@@ -39,18 +39,31 @@ Load the bazel_rules in your [`WORKSPACE` file][be_workspace]:
 
 Then, this rule can be used as one of the `srcs` of another rules, such as a `java_library`.
 
-## Example
- The example "jflex.examples.helloworld" generates a lexer from `helloworld.flex` with:
+### Attributes
+
+* **name** (Name; required)
+  Unique name for this target.
+* **srcs** (List of labels; required)
+  List of flex specifications.
+* **outputs** (list of labels; required)
+  List of the generated java files.
+* **skeleton** (Label; optional)
+  Skeleton use by the JFlex Emitter. **Only use this option if you know what you are doing.**
+  
+
+### Example
+
+The example **//java/jflex/examples/helloworld** generates a lexer from `helloworld.flex` with:
  
      jflex(
         name = "gen_hello_lexer",
         srcs = ["helloworld.flex"],
         outputs = ["HelloWorld.java"],
     )
+
+See [//java/jflex/examples/helloworld](/java/jflex/examples/helloworld) for more information.
  
- See `java/jflex/examples/helloworld`.
- 
- ## Directory layout
+## Directory layout
  ```
 ├── assets                 → assets for the web site
 ├── java                   → main Java source code
