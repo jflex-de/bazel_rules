@@ -41,8 +41,8 @@ Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]:
 
     jflex(
         name = "",           # Choose a rule name
-        srcs = [],           # Add input lex specifications
-        outputs = [],        # List expected generated files
+        srcs = [],           # A list of flex specifications
+        outputs = [],        # List of expected generated files
     )
     
     cup(
@@ -52,31 +52,8 @@ Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]:
 
 As usual, these rules can be used as one of the `srcs` of another rules, such as a `java_library`.
 
+For more details, see [cup](cup) and [jflex](jflex).
 
-### Attributes
-
-* **name** (Name; required)
-  Unique name for this target.
-* **srcs** (List of labels; required)
-  List of flex specifications.
-* **outputs** (list of labels; required)
-  List of the generated java files.
-* **skeleton** (Label; optional)
-  Skeleton use by the JFlex Emitter. **Only use this option if you know what you are doing.**
-  
-
-### Example
-
-The example **//java/jflex/examples/helloworld** generates a lexer from `helloworld.flex` with:
- 
-     jflex(
-        name = "gen_hello_lexer",
-        srcs = ["helloworld.flex"],
-        outputs = ["HelloWorld.java"],
-    )
-
-See [//java/jflex/examples/helloworld](/java/jflex/examples/helloworld) for more information.
- 
 ## Directory layout
  ```
 ├── assets                 → assets for the web site
