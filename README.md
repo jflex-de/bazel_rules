@@ -31,6 +31,7 @@ Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]:
 
     load("@jflex_rules//jflex:deps.bzl", "jflex_deps")
 
+    # If you want to use JFlex.
     jflex_deps()
 
 

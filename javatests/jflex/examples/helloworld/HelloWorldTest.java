@@ -27,7 +27,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/** Test for {@link HelloWorld} lexer. */
+/**
+ * Test for {@link HelloWorld} lexer.
+ *
+ * @author Régis Décamps
+ */
 public class HelloWorldTest {
 
   private OutputStream out;
