@@ -35,12 +35,12 @@ import java_cup.runtime.Symbol;
 %unicode
 
 %{
-    /** Creates a new {@link java_cup.runtime.Symbol} of the given type. */
+    /** Creates a new {@link Symbol} of the given type. */
     private Symbol symbol(int type) {
         return new Symbol(type, yyline, yycolumn);
     }
 
-    /** Creates a new {@link java_cup.runtime.Symbol} of the given type and value. */
+    /** Creates a new {@link Symbol} of the given type and value. */
     private Symbol symbol(int type, Object value) {
         return new Symbol(type, yyline, yycolumn, value);
     }
@@ -81,8 +81,8 @@ WhiteSpace     = {LineTerminator} | [ \t\f]
     {WhiteSpace}       { /* do nothing with space */ }
 }
 
-// We have changed the default symbol in the bazel `cup()` rule, so we need to change how JFlex
-// handles the end of file.
+// We have changed the default symbol in the bazel `cup()` rule from "sym" to "Calc", so we need to
+// change how JFlex handles the end of file.
 // See http://jflex.de/manual.html#custom-symbol-interface
 <<EOF>>                { return symbol(Calc.EOF); }
 
