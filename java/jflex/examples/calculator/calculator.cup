@@ -1,0 +1,64 @@
+package jflex.examples.calculator;
+
+import java_cup.runtime.Symbol;
+import java.util.Vector;
+/*
+ * Copyright (C) 2018 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/**
+ * Parser for a simple calculator.
+ * @author Régis Décamps
+ */
+
+parser code {:
+  Object result;
+:}
+
+terminal LPAR, RPAR;
+terminal MULTIPLY, DIVIDE;
+terminal PLUS, MINUS;
+terminal Integer NUMBER;
+
+non terminal String term_form;
+non terminal addition_expr, multiply_expr, parentheses_expr;
+non terminal number_expr;
+non terminal res;
+
+precedence left PLUS;
+precedence left MULTIPLY;
+
+res ::= term_form:t {: result = t; :}
+  ;
+
+term_form ::=
+    addition_expr
+  | multiply_expr
+  | parentheses_expr
+  | number_expr
+  ;
+addition_expr ::=
+    term_form:t1 PLUS term_form:t2 {: RESULT = t1 + "+" + t2; :}
+    ;
+multiply_expr ::=
+    term_form:t1 MULTIPLY term_form:t2 {: RESULT = t1 + "*" + t2; :}
+    ;
+parentheses_expr ::=
+    LPAR term_form:t RPAR {: RESULT = "(" + t + ")"; :}
+    ;
+number_expr ::=
+    NUMBER:nb {: RESULT = nb; :}
+    ;
