@@ -28,11 +28,10 @@ public class CalculatorLexerTest {
 
   @Test
   public void test() throws IOException {
-    lexer = createLexer("1 + 2 - * (3)");
+    lexer = createLexer("1 + 2 * (3)");
     assertThatNextTokenIsEqualTo(Calc.NUMBER, 1);
     assertThatNextTokenIsEqualTo(Calc.PLUS);
     assertThatNextTokenIsEqualTo(Calc.NUMBER, 2);
-    assertThatNextTokenIsEqualTo(Calc.MINUS);
     assertThatNextTokenIsEqualTo(Calc.MULTIPLY);
     assertThatNextTokenIsEqualTo(Calc.LPAR);
     assertThatNextTokenIsEqualTo(Calc.NUMBER, 3);

@@ -21,44 +21,56 @@ import java.util.Vector;
 
 /**
  * Parser for a simple calculator.
+ *
+ * <p>The grammar defines a simple arihmetic expressions that supports the addition,
+ * the multiplication, and parentheses.
+ *
  * @author Régis Décamps
  */
 
 parser code {:
-  Object result;
 :}
 
+// Terminals: () * +
 terminal LPAR, RPAR;
-terminal MULTIPLY, DIVIDE;
-terminal PLUS, MINUS;
+terminal MULTIPLY;
+terminal PLUS;
+// A number is also a terminal, bit it's of type Integer.
 terminal Integer NUMBER;
 
-non terminal String term_form;
-non terminal addition_expr, multiply_expr, parentheses_expr;
-non terminal number_expr;
-non terminal res;
+non terminal Object  expr_list, expr_line;
+non terminal Integer expr;
+non terminal Integer multiply_expr;
+non terminal Integer term;
 
 precedence left PLUS;
 precedence left MULTIPLY;
 
-res ::= term_form:t {: result = t; :}
-  ;
+// This is where the grammar starts.
 
-term_form ::=
-    addition_expr
-  | multiply_expr
-  | parentheses_expr
-  | number_expr
+// An expression is a sum of priority_expr. Because the parser needs to produce priority_expr in
+// in order to assemble expr, this effectively makes priority_expr of higher priority than
+// than expr in the computation of the result.
+// We also implement the actual computation done by the calculator. RESULT is the label that is
+// assigned automatically to the rhs, in this case 'expr' because 'expr ::= ...'.
+// Since the priority_expr is an object of type Integer, we can call intValue() to retrieve its
+// value.
+expr ::=
+    expr:a PLUS multiply_expr:b
+    {: RESULT = a.intValue() + b.intValue(); :}
+  | multiply_expr:e
+    {: RESULT = e; :}
   ;
-addition_expr ::=
-    term_form:t1 PLUS term_form:t2 {: RESULT = t1 + "+" + t2; :}
-    ;
 multiply_expr ::=
-    term_form:t1 MULTIPLY term_form:t2 {: RESULT = t1 + "*" + t2; :}
-    ;
-parentheses_expr ::=
-    LPAR term_form:t RPAR {: RESULT = "(" + t + ")"; :}
-    ;
-number_expr ::=
-    NUMBER:nb {: RESULT = nb; :}
-    ;
+    multiply_expr:a MULTIPLY term:b
+    {: RESULT = a.intValue() * b.intValue(); :}
+  | term:t
+    {: RESULT = t; :}
+  ;
+// The last term closes the grammar. It's a number, or another expression in parentheses.
+// Note that local identifiers don't need to be a single letter. We use "nb" for the terminal
+// number.
+term ::=
+    LPAR expr:e RPAR {: RESULT = e; :}
+  | NUMBER:nb {: RESULT = nb; :}
+  ;
