@@ -38,7 +38,6 @@ terminal PLUS;
 // A number is also a terminal, bit it's of type Integer.
 terminal Integer NUMBER;
 
-non terminal Object  expr_list, expr_line;
 non terminal Integer expr;
 non terminal Integer multiply_expr;
 non terminal Integer term;
