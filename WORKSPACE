@@ -5,5 +5,8 @@
 # See https://docs.bazel.build/versions/master/build-ref.html#workspace
 
 load("//jflex:deps.bzl", "jflex_deps")
+load("//third_party:third_party_deps.bzl", "third_party_deps")
 
 jflex_deps()
+
+third_party_deps()
