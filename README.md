@@ -13,9 +13,6 @@ Status of the **master** branch:
 <img src="https://api.cirrus-ci.com/github/jflex-de/bazel_rules.svg" alt="Build status" height="20">
 </a>
 
-## Disclaimer
-
-Master: [![Build Status](https://api.cirrus-ci.com/github/jflex-de/bazel_rules.svg)](https://cirrus-ci.com/github/jflex-de/bazel_rules)
 
 ## Disclaimer
 
