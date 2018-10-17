@@ -16,6 +16,10 @@ Status of the **master** branch:
 
 ## Disclaimer
 
+Master: [![Build Status](https://api.cirrus-ci.com/github/jflex-de/bazel_rules.svg)](https://cirrus-ci.com/github/jflex-de/bazel_rules)
+
+## Disclaimer
+
 This is not an officially supported Google product.
 
 ## Prepare your Bazel workspace
