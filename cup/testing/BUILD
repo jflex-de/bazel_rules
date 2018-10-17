@@ -1,7 +1,6 @@
-package(default_visibility = ["//javatests:__subpackages__"])
+package(default_visibility = ["//javatests:__subpackages__", "//java/jflex/examples/custom_bin:__pkg__"])
 
 sh_binary(
     name = "fake_cup_bin",
-    testonly = True,
     srcs = ["fake_cup.sh"],
 )
