@@ -1,3 +1,5 @@
+package(default_visibility=["//javatests/jflex/examples/custom_bin:__pkg__"])
+
 load("//jflex:jflex.bzl", "jflex")
 load("//cup:cup.bzl", "cup")
 

@@ -14,6 +14,8 @@ shift $((OPTIND-1))
 
 [ "${1:-}" = "--" ] && shift
 
-cat > ${output_dir}/Empty.java << _EOF_
+out=${output_dir}/Empty.java
+echo "Fake output in ${out}"
+cat > ${out} << _EOF_
 class Empty {}
 _EOF_
