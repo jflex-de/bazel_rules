@@ -21,17 +21,20 @@ def _cup_impl(ctx):
     args.extend(["-destdir", output_dir])
     if ctx.attr.interface:
         args.append("-interface")
+    args.extend([ctx.file.src.path])
     # TODO(regisd): Add support for CUP options.
     print("Arguments " + (" ".join(args)))
     parser_file = ctx.actions.declare_file(ctx.attr.parser + ".java")
     sym_file = ctx.actions.declare_file(ctx.attr.symbols + ".java")
-    print("outputs" + str(parser_file.path))
-    ctx.action(
+    ctx.actions.run(
         inputs = [ctx.file.src],
         outputs = [parser_file, sym_file],
         executable = ctx.executable.cup_bin,
         arguments = args,
     )
+    return [DefaultInfo(
+        files = depset([parser_file, sym_file]),
+    )]
 
 cup = rule(
     implementation = _cup_impl,
@@ -43,7 +46,7 @@ cup = rule(
             doc = "The CUP grammar specification",
         ),
         "cup_bin": attr.label(
-            default = Label("//third_party/cup:cup_bin"),
+            default = Label("//cup/testing:fake_cup_bin"),#Label("//third_party/cup:cup_bin"),
             executable = True,
             cfg = "host",
             doc = "The java_binary of CUP",
