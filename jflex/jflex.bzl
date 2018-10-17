@@ -26,12 +26,11 @@ def _jflex_impl(ctx):
         # Input files
         [f.path for f in ctx.files.srcs]
     )
-    ctx.action(
+    ctx.actions.run(
         inputs = ctx.files.srcs + maybe_skel,
         outputs = ctx.outputs.outputs,
         executable = ctx.executable.jflex_bin,
-        arguments =
-            arguments,
+        arguments = arguments,
     )
     print("Arguments " + (" ".join(arguments)))
 
