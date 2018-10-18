@@ -27,6 +27,7 @@ def _jflex_impl(ctx):
         [f.path for f in ctx.files.srcs]
     )
     ctx.actions.run(
+        mnemonic = "jflex",
         inputs = ctx.files.srcs + maybe_skel,
         outputs = ctx.outputs.outputs,
         executable = ctx.executable.jflex_bin,
