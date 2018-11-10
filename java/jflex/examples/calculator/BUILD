@@ -8,8 +8,12 @@ load("//cup:cup.bzl", "cup")
 
 java_library(
     name = "calculator",
-    srcs = ["CalculatorParserException.java",":gen_parser", ":gen_lexer"],
-    deps =[
+    srcs = [
+        "CalculatorParserException.java",
+        ":gen_parser",
+        ":gen_lexer",
+    ],
+    deps = [
         "//third_party/cup", # the runtime would be sufficient
     ]
 )
