@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package jflex.examples.calculator;
+package jflex.examples.cup_calculator;
 
 import java_cup.runtime.Symbol;
 
