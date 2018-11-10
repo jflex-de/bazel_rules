@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package jflex.examples.cup_calculator;
+package jflex.examples.jacc_calculator;
 
-import java_cup.runtime.Symbol;
+import jflex.examples.calculator.CalculatorParserException;
 
 /**
  * A simple lexer/parser for basic arithmetic expressions.
@@ -29,20 +29,26 @@ import java_cup.runtime.Symbol;
 
 %public
 %class CalculatorLexer
-// Use CUP compatibility mode to interface with a CUP parser.
-%cup
+%int
 
 %unicode
 
 %{
-    /** Creates a new {@link Symbol} of the given type. */
-    private Symbol symbol(int type) {
-        return new Symbol(type, yyline, yycolumn);
+    private int     token;
+    private IntExpr yylval;
+
+    /**
+     * Returns the token code for the current lexeme.
+     */
+    int getToken() {
+      return token;
     }
 
-    /** Creates a new {@link Symbol} of the given type and value. */
-    private Symbol symbol(int type, Object value) {
-        return new Symbol(type, yyline, yycolumn, value);
+    /**
+     * Returns the semantic value for the current lexeme.
+     */
+    IntExpr getSemantic() {
+      return yylval;
     }
 %}
 
@@ -66,23 +72,19 @@ WhiteSpace     = {LineTerminator} | [ \t\f]
 <YYINITIAL> {
 
     /* Create a new parser symbol for the lexem. */
-    "+"                { return symbol(Calc.PLUS); }
-    "*"                { return symbol(Calc.MULTIPLY); }
-    "("                { return symbol(Calc.LPAR); }
-    ")"                { return symbol(Calc.RPAR); }
+    "+"                { return token = '+'; }
+    "*"                { return token = '*'; }
+    "("                { return token = '('; }
+    ")"                { return token = ')'; }
 
     // If an integer is found, return the token NUMBER that represents an integer and the value of
     // the integer that is held in the string yytext
-    {Number}           { return symbol(Calc.NUMBER, Integer.parseInt(yytext())); }
+    {Number}           { yylval = new IntExpr(Integer.valueOf(yytext())); return token = INTEGER; }
 
     /* Don't do anything if whitespace is found */
     {WhiteSpace}       { /* do nothing with space */ }
 }
 
-// We have changed the default symbol in the bazel `cup()` rule from "sym" to "Calc", so we need to
-// change how JFlex handles the end of file.
-// See http://jflex.de/manual.html#custom-symbol-interface
-<<EOF>>                { return symbol(Calc.EOF); }
 
 /* Catch-all the rest, i.e. unknow character. */
 [^]  { throw new CalculatorParserException("Illegal character <" + yytext() + ">"); }
