@@ -65,5 +65,5 @@ cup = rule(
             doc = "Outputs the symbol constant code as an interface rather than as a class.",
         ),
     },
-    output_to_genfiles = True,  # JFlex generates java files, not bin files
+    output_to_genfiles = True,  # cup generates java files, not bin files
 )
