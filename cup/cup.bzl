@@ -24,7 +24,6 @@ def _cup_impl(ctx):
     args.extend([ctx.file.src.path])
 
     # TODO(regisd): Add support for CUP options.
-    print("cup " + (" ".join(args)))
     parser_file = ctx.actions.declare_file(ctx.attr.parser + ".java")
     sym_file = ctx.actions.declare_file(ctx.attr.symbols + ".java")
     ctx.actions.run(
