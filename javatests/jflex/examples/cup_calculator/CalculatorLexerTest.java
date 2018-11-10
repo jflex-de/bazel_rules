@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java_cup.runtime.Symbol;
+import jflex.examples.calculator.CalculatorParserException;
 import org.junit.After;
 import org.junit.Test;
 

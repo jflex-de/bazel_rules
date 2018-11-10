@@ -17,7 +17,6 @@
 package jflex.examples.cup_calculator;
 
 import java_cup.runtime.Symbol;
-import jflex.examples.calculator.CalculatorParserException;
 
 /**
  * A simple lexer/parser for basic arithmetic expressions.
