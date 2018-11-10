@@ -25,4 +25,4 @@ The example **//java/jflex/examples/helloworld** generates a lexer from `hellowo
         symbols = "Calc",
     )
 
-See [//java/jflex/examples/helloworld](../java/jflex/examples/calculator).
+See [//java/jflex/examples/helloworld](../java/jflex/examples/cup_calculator).

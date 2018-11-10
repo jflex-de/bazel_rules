@@ -7,7 +7,7 @@ load("//jflex:jflex.bzl", "jflex")
 load("//cup:cup.bzl", "cup")
 
 java_library(
-    name = "calculator",
+    name = "cup_calculator",
     srcs = [
         "CalculatorParserException.java",
         ":gen_parser",
