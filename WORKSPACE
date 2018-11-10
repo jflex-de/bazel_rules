@@ -6,7 +6,10 @@
 
 load("//jflex:deps.bzl", "jflex_deps")
 load("//third_party:third_party_deps.bzl", "third_party_deps")
+load("//third_party/jacc:deps.bzl", "jacc_deps")
 
 jflex_deps()
 
 third_party_deps()
+
+jacc_deps()
