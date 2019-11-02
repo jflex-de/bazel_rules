@@ -45,8 +45,7 @@ jflex = rule(
             doc = "a list of grammar specifications",
         ),
         "skeleton": attr.label(
-            allow_files = True,
-            single_file = True,
+            allow_single_file = True,
             doc = "an optional skeleton",
         ),
         "outputs": attr.output_list(allow_empty = False),
