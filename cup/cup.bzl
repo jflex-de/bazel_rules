@@ -42,8 +42,7 @@ cup = rule(
     implementation = _cup_impl,
     attrs = {
         "src": attr.label(
-            allow_files = True,
-            single_file = True,
+            allow_single_file = True,
             mandatory = True,
             doc = "The CUP grammar specification",
         ),
