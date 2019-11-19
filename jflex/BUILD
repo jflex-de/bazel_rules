@@ -14,12 +14,12 @@ java_binary(
     ],
 )
 
-alias(
+java_library(
     name = "jflex",
-    actual = "@maven//:de_jflex_jflex_1_7_0",
+    exports = ["@de_jflex_jflex_1_7_0//jar"],
 )
 
-alias(
+java_library(
     name = "cup_runtime",
-    actual = "@maven//:de_jflex_cup_runtime_11b",
+    exports = ["@de_jflex_cup_runtime_11b//jar"],
 )
