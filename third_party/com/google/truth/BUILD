@@ -8,7 +8,7 @@ java_library(
     name = "truth",
     visibility = ["//visibility:public"],
     exports = [
-        "@com_google_truth_truth//jar",
+        "@maven//:com_google_truth_truth_0_42",
         # TODO(regisd) This should be a runtime_deps
         # But in that case Optional is not found
         "//third_party/com/google/guava",
