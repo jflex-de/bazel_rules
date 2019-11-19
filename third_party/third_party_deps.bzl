@@ -1,13 +1,8 @@
-# Please keep deps in alphabetical order
-def third_party_deps():
+# Copyright 2018-2019 Google LLC.
+# SPDX-License-Identifier: Apache-2.0
 
-    native.maven_jar(
-        name = "com_google_guava_guava_26_0_jre",
-        artifact = "com.google.guava:guava:26.0-jre",
-        repository = "https://jcenter.bintray.com/",
-    )
-    native.maven_jar(
-        name = "com_google_truth_truth",
-        artifact = "com.google.truth:truth:0.42",
-        repository = "https://jcenter.bintray.com/",
-    )
+# Please keep deps in alphabetical order
+THIRD_PARTY_ARTIFACTS = [
+    "com.google.guava:guava:28.1-jre",
+    "com.google.truth:truth:1.0",
+]
