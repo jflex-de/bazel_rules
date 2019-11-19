@@ -1,3 +1,6 @@
+# Copyright 2018-2019 Google LLC.
+# SPDX-License-Identifier: Apache-2.0
+
 # Google truth
 # Fluent assertions for Java tests
 # http://google.github.io/truth/
