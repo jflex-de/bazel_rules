@@ -1,11 +1,11 @@
-# Copyright 2018 Google LLC.
+# Copyright 2018-2019 Google LLC.
 # SPDX-License-Identifier: Apache-2.0
 
 # This WORKSPACE file defines the workspace for the Bazel build system.
 # See https://docs.bazel.build/versions/master/build-ref.html#workspace
 
-load("//jflex:deps.bzl", "jflex_deps")
-load("//third_party:third_party_deps.bzl", "THIRD_PARTY_DEPS")
+load("//jflex:deps.bzl", "JFLEX_DEPS")
+load("//third_party:third_party_deps.bzl", "THIRD_PARTY_ARTIFACTS")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 RULES_JVM_EXTERNAL_TAG = "2.10"
@@ -21,20 +21,16 @@ http_archive(
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-jflex_deps()
-
 maven_install(
-    name = "maven_jflex",
-    artifacts = THIRD_PARTY_DEPS,
+    name = "maven",
+    artifacts = THIRD_PARTY_ARTIFACTS + JFLEX_DEPS,
     repositories = [
-        # Private repositories are supported through HTTP Basic auth
-        "http://username:password@localhost:8081/artifactory/my-repository",
         "https://jcenter.bintray.com/",
-        "https://maven.google.com",
-        "https://repo1.maven.org/maven2",
+        "https://maven.google.com/",
+        "https://repo1.maven.org/maven2/",
     ],
-    maven_install_json = "//:maven_jflex_install.json",
+    maven_install_json = "//:maven_install.json",
 )
 
-load("@maven_jflex//:defs.bzl", "pinned_maven_install")
+load("@maven//:defs.bzl", "pinned_maven_install")
 pinned_maven_install()
