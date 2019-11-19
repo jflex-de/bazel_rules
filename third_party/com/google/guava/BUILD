@@ -6,6 +6,6 @@ licenses(["notice"])  # Apache License 2.0
 
 alias(
     name = "guava",
-    actual = "@com_google_guava_guava_26_0_jre//jar",
+    actual = "@maven_jflex//:com_google_guava_guava_26_0_jre",
     visibility = ["//visibility:public"],
 )

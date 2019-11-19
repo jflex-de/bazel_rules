@@ -1,6 +1,8 @@
 # Copyright 2018-2019 Google LLC.
 # SPDX-License-Identifier: Apache-2.0
 
+# maven_install can only be used in WORKSPACE, so we will keep the deprecated maven_jar for some
+# time.
 def jflex_deps():
     """Bazel macro that imports dependencies used by JFlex."""
 
