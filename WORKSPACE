@@ -4,7 +4,7 @@
 # This WORKSPACE file defines the workspace for the Bazel build system.
 # See https://docs.bazel.build/versions/master/build-ref.html#workspace
 
-load("//jflex:deps.bzl", "jflex_deps")
+load("//jflex:deps.bzl", "JFLEX_DEPS")
 load("//third_party:third_party_deps.bzl", "THIRD_PARTY_ARTIFACTS")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
@@ -23,12 +23,10 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
     name = "maven",
-    artifacts = THIRD_PARTY_ARTIFACTS,
+    artifacts = THIRD_PARTY_ARTIFACTS + JFLEX_DEPS,
     repositories = [
         "https://jcenter.bintray.com/",
         "https://maven.google.com/",
         "https://repo1.maven.org/maven2/",
     ],
 )
-
-jflex_deps()
