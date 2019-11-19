@@ -10,18 +10,28 @@
 def _jacc_impl(ctx):
     """ Generates a Java parser from a jacc definition, using jacc. """
 
-    # Output directory is bazel-genfiles/package, regardless of Java package defined in
-    # the grammar
-    output_dir = "/".join(
-        [ctx.configuration.genfiles_dir.path, ctx.label.package],
+    jacc_spec = ctx.actions.declare_file(
+        ctx.configuration.genfiles_dir.path + "/" + ctx.file.src.basename,
     )
+    print("jacc in genfiles: " + str(jacc_spec))
+    ctx.actions.run_shell(
+        inputs = [ctx.file.src],
+        outputs = [jacc_spec],
+        command = "cp '{source}' .".format(
+            source = ctx.file.src.path,
+            pkg = ctx.file.src.dirname,
+            gendir = ctx.configuration.genfiles_dir.path,
+        ),
+    )
+
     args = []
+
     # TODO(regisd): Add support for jacc options.
     args.extend([ctx.file.src.path])
-
+    print("Generating in "+str(ctx.file.src.path))
     ctx.actions.run(
         mnemonic = "jacc",
-        inputs = [ctx.file.src],
+        inputs = [jacc_spec],
         outputs = [ctx.outputs.parser, ctx.outputs.tokens],
         executable = ctx.executable.jacc_bin,
         arguments = args,
@@ -44,8 +54,8 @@ jacc = rule(
         ),
     },
     outputs = {
-    "parser": "%{src}Parser.java",
-    "tokens": "%{src}Tokens.java",
+        "parser": "%{src}Parser.java",
+        "tokens": "%{src}Tokens.java",
     },
     output_to_genfiles = True,  # jacc generates java files, not bin files
 )
