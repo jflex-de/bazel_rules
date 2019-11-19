@@ -6,6 +6,6 @@ licenses(["notice"])  # Apache License 2.0
 
 alias(
     name = "truth",
-    actual = "@maven_jflex//:com_google_truth_truth_0_42",
+    actual = "@maven_jflex//:com_google_truth_truth_1_0",
     visibility = ["//visibility:public"],
 )
