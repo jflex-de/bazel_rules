@@ -7,70 +7,101 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Test;
 
-class CaselessScannerTest {
+public class CaselessScannerTest {
 
+  /** The moder JFlex scanner. */
   private CaselessJflexScanner jflexScanner;
+  /** The scanner with JLex compatibility. */
+  private CaselessLexScanner lexScanner;
 
   @Test
   public void singleChar_lower() throws Exception {
-    String content = "a";
-    jflexScanner = createJflexScanner(content);
+    initScanners("a");
     assertThat(jflexScanner.yylex()).isEqualTo(Token.A);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.A);
   }
 
   @Test
   public void singleChar_upper() throws Exception {
-    String content = "A";
-    jflexScanner = createJflexScanner(content);
+    initScanners("A");
     assertThat(jflexScanner.yylex()).isEqualTo(Token.A);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.A);
   }
 
   @Test
   public void singleWord_lower() throws Exception {
-    String content = "hello";
-    jflexScanner = createJflexScanner(content);
+    initScanners("hello");
     assertThat(jflexScanner.yylex()).isEqualTo(Token.HELLO);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.HELLO);
   }
 
   @Test
   public void singleWord_upper() throws Exception {
-    String content = "HELLO";
-    jflexScanner = createJflexScanner(content);
+    initScanners("HELLO");
     assertThat(jflexScanner.yylex()).isEqualTo(Token.HELLO);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.HELLO);
   }
 
   @Test
   public void singleWord_mixed() throws Exception {
-    String content = "HelLo";
-    jflexScanner = createJflexScanner(content);
+    initScanners("HelLo");
     assertThat(jflexScanner.yylex()).isEqualTo(Token.HELLO);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.HELLO);
   }
 
   @Test
   public void wordInSentence() throws Exception {
-    String content = "x hello x";
-    jflexScanner = createJflexScanner(content);
-    for (int i = 0; i < 6; i++) {
-      assertThat(jflexScanner.yylex()).isEqualTo(Token.OTHER);
-    }
+    initScanners("x hello x");
+
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.WORD);
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.HELLO);
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.WORD);
+
+    assertThat(lexScanner.yylex()).isEqualTo(Token.WORD);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.HELLO);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.WORD);
+  }
+
+  /** JFlex and Jlex compatibility behaviors differ when "hello" is withing a large string. */
+  @Test
+  public void helloWithinWord() throws Exception {
+    initScanners("blubHELLObla");
+
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.WORD);
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.HELLO);
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.WORD);
+
+    assertThat(lexScanner.yylex()).isEqualTo(Token.WORD);
+  }
+
+  @Test
+  public void helloWithinWord_mixedCase() throws Exception {
+    initScanners("sdfahelLobla");
+
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.WORD);
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.OTHER);
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.WORD);
+
+    assertThat(lexScanner.yylex()).isEqualTo(Token.WORD);
   }
 
   @Test
   public void other() throws Exception {
-    String content = "xhellox";
-    jflexScanner = createJflexScanner(content);
-    for (int i = 0; i < 6; i++) {
-      assertThat(jflexScanner.yylex()).isEqualTo(Token.OTHER);
-    }
+    initScanners("xhellox");
+    assertThat(jflexScanner.yylex()).isEqualTo(Token.WORD);
+    assertThat(lexScanner.yylex()).isEqualTo(Token.WORD);
   }
 
   @After
   public void resetJflexScanner() throws Exception {
-    assertThat(jflexScanner.yylex()).isEqualTo(null);
+    assertThat(jflexScanner.yylex()).isNull();
+    assertThat(lexScanner.yylex()).isNull();
     jflexScanner = null;
+    lexScanner = null;
   }
 
-  static CaselessJflexScanner createJflexScanner(String content) throws IOException {
-    return new CaselessJflexScanner(CharSource.wrap(content).openStream());
+  private void initScanners(String content) throws IOException {
+    jflexScanner = new CaselessJflexScanner(CharSource.wrap(content).openStream());
+    lexScanner = new CaselessLexScanner(CharSource.wrap(content).openStream());
   }
 }

@@ -10,6 +10,12 @@ caseless_scanner(
     deps = [":token"],
 )
 
+caseless_scanner(
+    name = "CaselessLexScanner",
+    jlex = True,
+    deps = [":token"],
+)
+
 java_library(
     name = "token",
     srcs = ["Token.java"],

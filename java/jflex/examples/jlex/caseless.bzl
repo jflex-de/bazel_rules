@@ -24,7 +24,7 @@ caseless = rule(
     outputs = {"jflex_file": "%{name}.flex"},
 )
 
-def caseless_scanner(name, deps = []):
+def caseless_scanner(name, deps = [], jlex = False):
     spec_name = name + "_jflex_spec"
     java_source = name + "_jflex"
     caseless(
@@ -36,6 +36,7 @@ def caseless_scanner(name, deps = []):
         name = java_source,
         srcs = [":" + spec_name],
         outputs = [name + ".java"],
+        jlex = jlex,
     )
 
     native.java_library(

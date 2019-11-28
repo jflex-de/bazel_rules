@@ -5,6 +5,5 @@ public enum Token {
   A,
   WORD,
   HELLO,
-  SP,
   OTHER,
 }

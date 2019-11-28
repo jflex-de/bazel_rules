@@ -15,8 +15,8 @@ SP = \r|\n|\r\n|\s
 %%
 
 a          { return Token.A; }
-[a-z]+     { return Token.WORD; }
 "hello"    { return Token.HELLO; }
+[a-z]+     { return Token.WORD; }
 
-{SP}       { return Token.SP; }
+{SP}       { /* skip */ }
 .          { return Token.OTHER; }
