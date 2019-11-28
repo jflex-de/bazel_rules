@@ -4,10 +4,16 @@
 package(default_visibility = ["//visibility:public"])
 
 load("//jflex:jflex.bzl", "jflex")
+load(":caseless.bzl", "caseless")
+
+caseless(
+    name = "caseless_jflex_spec",
+    className = "CaselessJflexScanner",
+)
 
 jflex(
     name = "gen_caseless_jflex_scanner",
-    srcs = ["caseless.flex"],
+    srcs = [":caseless_jflex_spec"],
     outputs = ["CaselessJflexScanner.java"],
 )
 

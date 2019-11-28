@@ -3,7 +3,7 @@ package jflex.examples.jlex;
 %%
 
 %public
-%class CaselessJflexScanner
+%class {className}
 %type Token
 
 %unicode
