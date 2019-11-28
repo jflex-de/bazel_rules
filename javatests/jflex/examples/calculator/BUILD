@@ -3,8 +3,8 @@ java_test(
     srcs = ["CalculatorLexerTest.java"],
     deps = [
         "//java/jflex/examples/calculator",
-        "//third_party/cup",
         "//third_party/com/google/truth",
+        "//third_party/cup",
     ],
 )
 
@@ -13,7 +13,7 @@ java_test(
     srcs = ["CalculatorParserTest.java"],
     deps = [
         "//java/jflex/examples/calculator",
-        "//third_party/cup",
         "//third_party/com/google/truth",
+        "//third_party/cup",
     ],
 )
