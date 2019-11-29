@@ -8,10 +8,14 @@ load("//cup:cup.bzl", "cup")
 
 java_library(
     name = "calculator",
-    srcs = ["CalculatorParserException.java",":gen_parser", ":gen_lexer"],
-    deps =[
-        "//third_party/cup", # the runtime would be sufficient
-    ]
+    srcs = [
+        "CalculatorParserException.java",
+        ":gen_lexer",
+        ":gen_parser",
+    ],
+    deps = [
+        "//third_party/cup",  # the runtime would be sufficient
+    ],
 )
 
 cup(
@@ -25,5 +29,4 @@ jflex(
     name = "gen_lexer",
     srcs = ["calculator.flex"],
     outputs = ["CalculatorLexer.java"],
-    
 )

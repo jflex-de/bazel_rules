@@ -26,13 +26,14 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     name = "maven",
     artifacts = THIRD_PARTY_ARTIFACTS,
+    maven_install_json = "//:maven_install.json",
     repositories = [
         "https://jcenter.bintray.com/",
         "https://maven.google.com/",
         "https://repo1.maven.org/maven2/",
     ],
-    maven_install_json = "//:maven_install.json",
 )
 
 load("@maven//:defs.bzl", "pinned_maven_install")
+
 pinned_maven_install()

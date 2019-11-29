@@ -2,7 +2,7 @@
 
 ## Generate the lexer
 
-Example usage of the `jflex()` rule itself:
+Simples example usage of the `jflex()` rule:
 
     jflex(
         name = "gen_hello_lexer",
