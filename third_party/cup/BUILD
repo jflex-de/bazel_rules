@@ -5,7 +5,7 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # CUP License
 
-# Version 11b-29160615
+# Version java-cup-bin-11b-20160615
 java_import(
     name = "cup",
     jars = ["java-cup-11b.jar"],
