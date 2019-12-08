@@ -1,0 +1,1 @@
+"hello" {return Token.HELLO;}
