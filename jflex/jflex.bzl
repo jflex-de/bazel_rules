@@ -31,7 +31,7 @@ def _jflex_impl(ctx):
     )
     ctx.actions.run(
         mnemonic = "jflex",
-        inputs = ctx.files.srcs + maybe_skel,
+        inputs = ctx.files.srcs + ctx.files.data + maybe_skel,
         outputs = ctx.outputs.outputs,
         executable = ctx.executable.jflex_bin,
         arguments = arguments,
@@ -46,6 +46,10 @@ jflex = rule(
             allow_files = True,
             mandatory = True,
             doc = "a list of grammar specifications",
+        ),
+        "data": attr.label_list(
+            allow_files = True,
+            doc = "extra files to pass to the rule, e.g. included grammar specs",
         ),
         "jlex": attr.bool(
             doc = "JLex compatibility increaed. In particular, this changes how caseless behaves.",
