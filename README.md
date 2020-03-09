@@ -50,6 +50,18 @@ and add `JFLEX_ARTIFACTS` in your `maven_install` rule:
         ],
     )
 
+If this is the first time you use `maven_install`, you need to generate the `maven_install.json` with
+ 
+```
+bazel run @maven//:pin
+```
+
+If you already used `mven_install` before, you need to update the pinned artifacts with:
+
+```
+bazel run @unpinned_maven//:pin
+```
+
 ## Usage in BUILD files
 
     load("@jflex_rules//jflex:jflex.bzl", "jflex")
