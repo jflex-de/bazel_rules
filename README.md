@@ -20,7 +20,14 @@ This is not an officially supported Google product.
 
 ## Prepare your Bazel workspace
 
-Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]:
+### Add a dependency on rules_jvm_external
+
+See [bazelbuild/rules_jvm_external][bb_jvm_external].
+
+### Load the jflex rule
+
+Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]
+and add `JFLEX_ARTIFACTS` in your `maven_install` rule:
 
     load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
@@ -30,11 +37,30 @@ Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]:
             branch = "stable",
     )
 
-    load("@jflex_rules//jflex:deps.bzl", "jflex_deps")
+    load("@jflex_rules//jflex:deps.bzl", "JFLEX_ARTIFACTS")
 
-    # If you want to use JFlex.
-    jflex_deps()
+    maven_install(
+        name = "maven",
+        artifacts = JFLEX_ARTIFACTS,
+        maven_install_json = "//:maven_install.json",
+        repositories = [
+            "https://jcenter.bintray.com/",
+            "https://maven.google.com",
+            "https://repo1.maven.org/maven2",
+        ],
+    )
 
+If this is the first time you use `maven_install`, you need to generate the `maven_install.json` with
+ 
+```
+bazel run @maven//:pin
+```
+
+If you already used `mven_install` before, you need to update the pinned artifacts with:
+
+```
+bazel run @unpinned_maven//:pin
+```
 
 ## Usage in BUILD files
 
@@ -77,3 +103,4 @@ For more details, see [cup](cup) and [jflex](jflex).
 [cup]: http://www2.cs.tum.edu/projects/cup/
 [be_maven_jar]: https://docs.bazel.build/versions/master/be/workspace.html#maven_jar
 [be_workspace]: https://docs.bazel.build/versions/master/tutorial/java.html#set-up-the-workspace 
+[bb_jvm_external]: https://github.com/bazelbuild/rules_jvm_external

@@ -16,10 +16,10 @@ java_binary(
 
 java_library(
     name = "jflex",
-    exports = ["@de_jflex_jflex_1_7_0//jar"],
+    exports = ["@maven//:de_jflex_jflex"],
 )
 
 java_library(
     name = "cup_runtime",
-    exports = ["@de_jflex_cup_runtime_11b//jar"],
+    exports = ["@maven//:de_jflex_cup_runtime"],
 )
