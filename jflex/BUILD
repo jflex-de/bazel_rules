@@ -21,5 +21,5 @@ java_library(
 
 java_library(
     name = "cup_runtime",
-    exports = ["@maven//:de_jflex_cup_runtime"],
+    exports = ["@maven//:com_github_vbmacher_java_cup_runtime"],
 )
