@@ -1,7 +1,7 @@
-# Copyright 2018 Google LLC.
+# Copyright 2020 Google LLC.
 # SPDX-License-Identifier: Apache-2.0
 
-JFLEX_ARTIFACTS=[
-    "de.jflex:jflex:1.7.0",
-    "de.jflex:cup_runtime:11b",
+JFLEX_ARTIFACTS = [
+    "de.jflex:jflex:jar:1.8.1",
+    "com.github.vbmacher:java-cup-runtime:jar:11b-20160615",
 ]
