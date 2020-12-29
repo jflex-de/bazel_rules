@@ -29,12 +29,14 @@ See [bazelbuild/rules_jvm_external][bb_jvm_external].
 Load the **bazel_rules** in your [`WORKSPACE` file][be_workspace]
 and add `JFLEX_ARTIFACTS` in your `maven_install` rule:
 
-    load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+    load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+    load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-    git_repository(
-            name = "jflex_rules",
-            remote = "https://github.com/jflex-de/bazel_rules.git",
-            branch = "stable",
+    http_archive(
+        name = "jflex_rules",
+        sha256 = "a4a9d59f39d4055c2deddd8058cf28baee916116a743d200c4bba58a13b9e184",
+        strip_prefix = "bazel_rules-1.8.2",
+        url = "https://github.com/jflex-de/bazel_rules/archive/v1.8.2.tar.gz",
     )
 
     load("@jflex_rules//jflex:deps.bzl", "JFLEX_ARTIFACTS")
@@ -56,7 +58,7 @@ If this is the first time you use `maven_install`, you need to generate the `mav
 bazel run @maven//:pin
 ```
 
-If you already used `mven_install` before, you need to update the pinned artifacts with:
+If you already used `maven_install` before, you need to update the pinned artifacts with:
 
 ```
 bazel run @unpinned_maven//:pin
