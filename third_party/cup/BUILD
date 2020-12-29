@@ -6,9 +6,10 @@ package(default_visibility = ["//visibility:public"])
 licenses(["notice"])  # CUP License
 
 # Version java-cup-bin-11b-20160615
-java_import(
+alias(
     name = "cup",
-    jars = ["java-cup-11b.jar"],
+    actual = "@maven//:com_github_vbmacher_java_cup",
+    visibility = ["//visibility:public"],
 )
 
 java_binary(
