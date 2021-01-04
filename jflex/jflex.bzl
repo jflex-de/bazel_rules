@@ -36,7 +36,6 @@ def _jflex_impl(ctx):
         executable = ctx.executable.jflex_bin,
         arguments = arguments,
     )
-    print("jflex " + (" ".join(arguments)))
 
 jflex = rule(
     implementation = _jflex_impl,
