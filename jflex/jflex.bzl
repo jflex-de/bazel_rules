@@ -21,9 +21,11 @@ def _jflex_impl(ctx):
     maybe_skel = [ctx.file.skeleton] if ctx.file.skeleton else []
     arg_maybe_skel = ["-skel", ctx.file.skeleton.path] if ctx.file.skeleton else []
     arg_maybe_jlex = ["--jlex"] if ctx.attr.jlex else []
+    arg_maybe_quiet = ["--quiet"] if ctx.attr.quiet else []
     arguments = (
         arg_maybe_skel +
         arg_maybe_jlex +
+        arg_maybe_quiet +
         # Option to specify output directory
         ["-d", output_dir] +
         # Input files
@@ -58,6 +60,10 @@ jflex = rule(
             doc = "an optional skeleton",
         ),
         "outputs": attr.output_list(allow_empty = False),
+        "quiet": attr.bool(
+            doc = "JFlex generation outputs error messages only",
+            default = True,
+        ),
         "jflex_bin": attr.label(
             default = Label("//jflex:jflex_bin"),
             executable = True,
