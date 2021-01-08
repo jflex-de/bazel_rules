@@ -20,12 +20,12 @@ def _cup_impl(ctx):
     args.extend(["-parser", ctx.attr.parser])
     args.extend(["-symbols", ctx.attr.symbols])
     args.extend(["-destdir", output_dir])
+    args.extend(["-nosummary"])
     if ctx.attr.interface:
         args.append("-interface")
     args.extend([ctx.file.src.path])
 
     # TODO(regisd): Add support for CUP options.
-    print("cup " + (" ".join(args)))
     parser_file = ctx.actions.declare_file(ctx.attr.parser + ".java")
     sym_file = ctx.actions.declare_file(ctx.attr.symbols + ".java")
     ctx.actions.run(

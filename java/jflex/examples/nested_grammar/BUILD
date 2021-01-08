@@ -6,6 +6,7 @@ jflex(
     srcs = ["nested_grammar.jflex"],
     data = ["extra-jflex-rules.inc.jflex"],
     outputs = ["NestedRulesScanner.java"],
+    quiet = False,
 )
 
 java_library(
