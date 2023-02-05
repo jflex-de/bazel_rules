@@ -4,6 +4,6 @@
 # After updating dependencies, tun
 # bazel run @unpinned_maven//:pin
 JFLEX_ARTIFACTS = [
-    "de.jflex:jflex:jar:1.8.2",
-    "com.github.vbmacher:java-cup-runtime:jar:11b-20160615",
+    "de.jflex:jflex:jar:1.9.0",
+    "com.github.vbmacher:java-cup-runtime:jar:11b-20160615-1",
 ]
