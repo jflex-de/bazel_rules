@@ -34,7 +34,7 @@ and add `JFLEX_ARTIFACTS` in your `maven_install` rule:
 
     http_archive(
         name = "jflex_rules",
-        sha256 = "a4a9d59f39d4055c2deddd8058cf28baee916116a743d200c4bba58a13b9e184",
+        sha256 = "488e523bfed0e1793c68264341bc9c3050f4de3e4aa920f9a72d76ae327935e6",
         strip_prefix = "bazel_rules-1.9.0",
         url = "https://github.com/jflex-de/bazel_rules/archive/v1.9.0.tar.gz",
     )
