@@ -35,8 +35,8 @@ and add `JFLEX_ARTIFACTS` in your `maven_install` rule:
     http_archive(
         name = "jflex_rules",
         sha256 = "488e523bfed0e1793c68264341bc9c3050f4de3e4aa920f9a72d76ae327935e6",
-        strip_prefix = "bazel_rules-1.9.0",
-        url = "https://github.com/jflex-de/bazel_rules/archive/v1.9.0.tar.gz",
+        strip_prefix = "bazel_rules-1.9.1",
+        url = "https://github.com/jflex-de/bazel_rules/archive/v1.9.1.tar.gz",
     )
 
     load("@jflex_rules//jflex:deps.bzl", "JFLEX_ARTIFACTS")
@@ -53,16 +53,12 @@ and add `JFLEX_ARTIFACTS` in your `maven_install` rule:
     )
 
 If this is the first time you use `maven_install`, you need to generate the `maven_install.json` with
- 
-```
-bazel run @maven//:pin
-```
+
+    bazel run @maven//:pin
 
 If you already used `maven_install` before, you need to update the pinned artifacts with:
 
-```
-bazel run @unpinned_maven//:pin
-```
+    bazel run @unpinned_maven//:pin
 
 ## Usage in BUILD files
 
@@ -74,7 +70,7 @@ bazel run @unpinned_maven//:pin
         srcs = [],           # A list of flex specifications
         outputs = [],        # List of expected generated files
     )
-    
+
     cup(
         name = "",           # Choose a rule name
         src = "",            # Grammar specification
@@ -85,24 +81,21 @@ As usual, these rules can be used as one of the `srcs` of another rules, such as
 For more details, see [cup](cup) and [jflex](jflex).
 
 ## Directory layout
- ```
-├── assets                 → assets for the web site
-├── cup                    → contains the `cup.bzl` Skylark extension
-├── java                   → main Java source code
-│   └── jflex
-│       └── examples       → examples
-│           ├── calculator → integration of JFlex and CUP
-│           └── helloworld → simple lexer
-├── javatests              → tests of the examples
-├── jflex                  → contains the `jflex.bzl` Skylark extension
-└── third_party            → Aliases for third-party libraries
 
-```
+    ├── assets                 → assets for the web site
+    ├── cup                    → contains the `cup.bzl` Skylark extension
+    ├── java                   → main Java source code
+    │   └── jflex
+    │       └── examples       → examples
+    │           ├── calculator → integration of JFlex and CUP
+    │           └── helloworld → simple lexer
+    ├── javatests              → tests of the examples
+    ├── jflex                  → contains the `jflex.bzl` Skylark extension
+    └── third_party            → Aliases for third-party libraries
 
 
 [bazel]: http://bazel.build/
 [gh-jflex]: https://github.com/jflex-de/jflex
 [cup]: http://www2.cs.tum.edu/projects/cup/
-[be_maven_jar]: https://docs.bazel.build/versions/master/be/workspace.html#maven_jar
-[be_workspace]: https://docs.bazel.build/versions/master/tutorial/java.html#set-up-the-workspace 
+[be_workspace]: https://docs.bazel.build/versions/master/tutorial/java.html#set-up-the-workspace
 [bb_jvm_external]: https://github.com/bazelbuild/rules_jvm_external
